@@ -6,7 +6,9 @@ const pages = require('./pages.js')
 //iniciando express
 const server = express();
 server
-//uátilizando os arquivos estticos
+//utilizar body do req
+.use(express.urlencoded({extended: true}))
+//utilizando os arquivos estticos
 .use(express.static('public'))
 //vonfigurar template engine
 .set('views', path.join(__dirname, 'views'))
@@ -17,6 +19,7 @@ server
 .get('/orphanage', pages.orphanage)
 .get('/orphanages', pages.orphanages)
 .get('/create-orphanage', pages.createOrphanage)
+.post('/save-orphanage', pages.saveOrphanage)
 
 .get('/', (request, response)=>{
     return response.render('index')
